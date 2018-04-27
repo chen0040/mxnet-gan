@@ -162,7 +162,7 @@ class DCGan(object):
             for batch in train_data:
 
                 # Step 1: Update netD
-                data = train_data.data[0].as_in_context(self.model_ctx)
+                data = batch.data[0].as_in_context(self.model_ctx)
                 random_input = nd.random_normal(0, 1, shape=(data.shape[0], self.random_input_size, 1, 1), ctx=self.model_ctx)
 
                 with autograd.record():
