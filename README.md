@@ -1,2 +1,11 @@
-# keras-fractal-image
-Neural network that encode image to fractal equations and use the fractal equations to decode to another image
+# mxnet-gan
+
+Some GAN models that i studied while trying to learn MXNet.
+
+* Deep Convolution GAN
+* Pixel-to-Pixel GAN that performs image-to-image translation
+
+
+
+
+
