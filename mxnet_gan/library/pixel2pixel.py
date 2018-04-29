@@ -24,7 +24,7 @@ class UnetSkipUnit(HybridBlock):
             en_relu = LeakyReLU(0.2)
             en_norm = BatchNorm(momentum=.1, in_channels=inner_channels)
             de_relu = Activation('relu')
-            de_norm = BatchNorm(momentum=.1, inner_channels=outer_channels)
+            de_norm = BatchNorm(momentum=.1, in_channels=outer_channels)
 
             if inner_most:
                 de_conv = Conv2DTranspose(channels=outer_channels, in_channels=inner_channels, kernel_size=4, strides=2,
@@ -129,14 +129,19 @@ class ImagePool():
         ret_images = []
         for i in range(images.shape[0]):
             image = nd.expand_dims(images[i], axis=0)
-            p = nd.random_normal(0, 1, shape=(1, )).asscalar()
-            if p < 0.5:
-                random_index = nd.random_uniform(0, self.pool_size-1, shape=(1, )).astype(np.uint8).asscalar()
-                tmp = self.images[random_index].copy()
-                self.images[random_index] = image
-                ret_images.append(tmp)
-            else:
+            if self.num_imgs < self.pool_size:
+                self.num_imgs = self.num_imgs + 1
+                self.images.append(image)
                 ret_images.append(image)
+            else:
+                p = nd.random_normal(0, 1, shape=(1, )).asscalar()
+                if p < 0.5:
+                    random_index = nd.random_uniform(0, self.pool_size-1, shape=(1, )).astype(np.uint8).asscalar()
+                    tmp = self.images[random_index].copy()
+                    self.images[random_index] = image
+                    ret_images.append(tmp)
+                else:
+                    ret_images.append(image)
         ret_images = nd.concat(*ret_images, dim=0)
         return ret_images
 

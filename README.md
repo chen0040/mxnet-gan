@@ -5,6 +5,9 @@ Some GAN models that i studied while trying to learn MXNet.
 * Deep Convolution GAN
 * Pixel-to-Pixel GAN that performs image-to-image translation
 
+Currently this repository is just a bunch of algorithms re-produced from [http://gluon.mxnet.io](http://gluon.mxnet.io),
+with a simple wrapper to make them modular.
+
 # Usage
 
 ### Deep Convolution GAN
