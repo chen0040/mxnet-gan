@@ -20,7 +20,7 @@ def main():
 
     gan = DCGan(model_ctx=mx.gpu(0), data_ctx=mx.gpu(0))
 
-    gan.fit(data_dir_path=data_dir_path, model_dir_path=output_dir_path)
+    gan.fit(data_dir_path=data_dir_path, model_dir_path=output_dir_path, epochs=100)
 
 
 if __name__ == '__main__':
