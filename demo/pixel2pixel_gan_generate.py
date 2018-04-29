@@ -11,12 +11,12 @@ def patch_path(path):
 
 def main():
     sys.path.append(patch_path('..'))
-
+    output_dir_path = patch_path('output')
     model_dir_path = patch_path('models')
 
     from mxnet_gan.library.pixel2pixel import Pixel2PixelGan
     from mxnet_gan.data.facades_data_set import load_image_pairs
-    from mxnet_gan.library.image_utils import load_image, visualize
+    from mxnet_gan.library.image_utils import load_image, visualize, save_image
 
     img_pairs = load_image_pairs(patch_path('data/facades'))
 
@@ -25,12 +25,13 @@ def main():
 
     shuffle(img_pairs)
 
-    for source_img_path, _ in img_pairs[:20]:
+    for i, (source_img_path, _) in enumerate(img_pairs[:20]):
         source_img = load_image(source_img_path, gan.img_width, gan.img_height)
         target_img = gan.generate(source_image=source_img)
         img = mx.nd.concat(source_img.as_in_context(gan.model_ctx), target_img, dim=2)
-        # img = ((img.asnumpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8)
         visualize(img)
+        img = ((img.asnumpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8)
+        save_image(img, os.path.join(output_dir_path, Pixel2PixelGan.model_name + '-generated-' + str(i) + '.png'))
 
 
 if __name__ == '__main__':

@@ -180,6 +180,13 @@ if __name__ == '__main__':
     main()
 ```
 
+Below is some output images generated:
+
+|  ![](images/pixel-2-pixel-gan-generated-1.png) | ![](images/pixel-2-pixel-gan-generated-2.png) | ![](images/pixel-2-pixel-gan-generated-3.png) |
+|  ![](images/pixel-2-pixel-gan-generated-4.png) | ![](images/pixel-2-pixel-gan-generated-5.png) | ![](images/pixel-2-pixel-gan-generated-6.png) |
+|  ![](images/pixel-2-pixel-gan-generated-7.png) | ![](images/pixel-2-pixel-gan-generated-8.png) | ![](images/pixel-2-pixel-gan-generated-9.png) |
+
+
 # Note
 
 ### Training with GPU
